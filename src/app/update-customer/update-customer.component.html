@@ -1,0 +1,58 @@
+<mat-toolbar role="header" color="primary" >Update Customer Details</mat-toolbar>
+<form class="example-form" [formGroup]="customerForm">
+  
+    <mat-form-field  class="example-full-width">
+        <mat-select formControlName="Id" [(value)]="selectedId" placeholder="Id" >
+          <mat-option *ngFor="let Id of customerIds" (onSelectionChange)="fillAllControls($event, Id.key)"  [value]="Id">
+            {{Id.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <mat-form-field  class="example-full-width">
+        <mat-select formControlName="Title" [(value)]="title" placeholder="Title" >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let title of titles"   [value]="title.value">
+            {{title.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Name" formControlName="Name" value="">
+  </mat-form-field>
+  
+    <mat-radio-group formControlName="Gender">
+      Gender:
+      <mat-radio-button value="M">Male</mat-radio-button>
+      <mat-radio-button value="F" style="margin-left: 20px;">Female</mat-radio-button>
+    </mat-radio-group>
+  
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Email" formControlName="Email"></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Phone" formControlName="Phone"></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker" formControlName="DOB"  placeholder="Choose date of birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput  placeholder="Aadhar No." formControlName="AadharNo"></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Address" formControlName="Address"></textarea>
+  </mat-form-field>
+  <button mat-fab style="margin-left: 150px;"  [disabled]="!customerForm.valid" (click)="SubmitForm();" color="accent">Update</button>
+  <button mat-raised-button style="margin-left: 20px;" color="primary" *ngIf="isSuccessMessage"
+      matBadge="1" matBadgePosition="before" matBadgeColor="accent">
+    Customer inserted successfully.
+  </button>
+  <button mat-raised-button style="margin-left: 20px;" color="warn" *ngIf="isFailedMessage"
+  matBadge="1" matBadgePosition="before" matBadgeColor="accent">
+Customer insertion failed.
+</button>
+</form>
+<br>
+<br>
